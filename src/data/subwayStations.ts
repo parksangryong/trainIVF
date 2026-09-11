@@ -113,3 +113,34 @@ export const stations: Station[] = [
   { name: "동대구", line: 4 },
   { name: "경산", line: 4 },
 ];
+
+export type MetroId = "capital" | "busan" | "daegu" | "gwangju" | "daejeon";
+export interface MetroLine { id: string; name: string; color: string; stations: string[]; }
+export interface MetroSystem { id: MetroId; city: string; name: string; description: string; lines: MetroLine[]; }
+
+const line = (id: string, name: string, color: string, stationNames: string): MetroLine => ({ id, name, color, stations: stationNames.split(",") });
+const daeguLines: MetroLine[] = [1,2,3,4].map((number) => ({ id:String(number), name:number === 4 ? "대경선" : `${number}호선`, color:{1:"#D93F4C",2:"#20A465",3:"#F2A900",4:"#356EB4"}[number]!, stations:stations.filter((station) => station.line === number).map((station) => station.name) }));
+
+export const metroSystems: MetroSystem[] = [
+  { id:"capital", city:"수도권", name:"수도권 전철", description:"서울·인천·경기를 잇는 주요 도시철도", lines:[
+    line("1","1호선","#0052A4","소요산,의정부,청량리,서울역,용산,노량진,신도림,구로,수원,평택,천안"),
+    line("2","2호선","#00A84D","시청,을지로입구,동대문역사문화공원,왕십리,성수,잠실,강남,사당,신도림,홍대입구"),
+    line("3","3호선","#EF7C1C","대화,연신내,경복궁,종로3가,충무로,약수,고속터미널,양재,수서,오금"),
+    line("4","4호선","#00A5DE","진접,노원,창동,동대문,명동,서울역,삼각지,동작,사당,금정,오이도"),
+    line("5","5호선","#996CAC","방화,김포공항,여의도,광화문,동대문역사문화공원,왕십리,군자,천호,하남검단산"),
+    line("6","6호선","#CD7C2F","응암,디지털미디어시티,합정,이태원,약수,동묘앞,고려대,석계,봉화산,신내"),
+    line("7","7호선","#747F00","장암,도봉산,노원,건대입구,강남구청,고속터미널,가산디지털단지,부평구청,석남"),
+    line("8","8호선","#E6186C","별내,구리,암사,천호,잠실,가락시장,복정,모란"),
+    line("9","9호선","#BDB092","개화,김포공항,여의도,노량진,고속터미널,신논현,선정릉,종합운동장,중앙보훈병원"),
+  ]},
+  { id:"busan", city:"부산", name:"부산 도시철도", description:"부산과 김해·양산을 연결하는 도시철도", lines:[
+    line("1","1호선","#F06A00","다대포해수욕장,하단,사하,서면,부산역,남포,동래,부산대,노포"),
+    line("2","2호선","#81BF48","양산,호포,덕천,사상,서면,수영,해운대,장산"),
+    line("3","3호선","#BB8C00","수영,연산,미남,덕천,구포,대저"),
+    line("4","4호선","#217DCB","미남,동래,충렬사,반여농산물시장,고촌,안평"),
+    line("bg","부산김해경전철","#875CAC","사상,공항,대저,김해대학,수로왕릉,가야대"),
+  ]},
+  { id:"daegu", city:"대구", name:"대구 도시철도", description:"대구와 경산·구미권을 잇는 도시철도", lines:daeguLines },
+  { id:"gwangju", city:"광주", name:"광주 도시철도", description:"광주 도심을 동서로 연결하는 1호선", lines:[line("1","1호선","#009088","평동,광주송정역,공항,김대중컨벤션센터,상무,농성,금남로4가,문화전당,남광주,소태,녹동")]},
+  { id:"daejeon", city:"대전", name:"대전 도시철도", description:"대전 주요 생활권을 연결하는 1호선", lines:[line("1","1호선","#007448","반석,노은,유성온천,정부청사,시청,서대전네거리,중앙로,대전역,판암")]},
+];
