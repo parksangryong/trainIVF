@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { metroSystems } from "../data/subwayStations";
+import SeoGuide from "../SeoGuide";
 
 const SubWayGame = () => {
   const { metroId, lineId } = useParams();
@@ -41,6 +42,7 @@ const SubWayGame = () => {
           <div className="section-title"><span>1</span><div><h2 id="region-heading">지역 선택</h2><p>전국 주요 도시철도를 지원해요.</p></div></div>
           <div className="metro-grid">{metroSystems.map((system) => <Link key={system.id} className="metro-option" to={`/metro/${system.id}`}><span className="city-icon" aria-hidden="true">{system.city.slice(0,1)}</span><span className="option-copy"><b>{system.city}</b><small>{system.name} · {system.lines.length}개 노선</small></span><span className="option-arrow" aria-hidden="true">→</span></Link>)}</div>
         </section>
+        <SeoGuide />
       </main>
     );
   }
