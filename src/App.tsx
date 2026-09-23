@@ -1,3 +1,4 @@
+import Guide from "./Guide";
 import { createBrowserRouter, createMemoryRouter, RouterProvider } from "react-router-dom";
 import SubWayGame from "./page/SubWayGame";
 import { AdSense } from "./Advertising/AdSense";
@@ -12,6 +13,7 @@ function App({ url }: { url?: string }) {
     { path: "/metro/:metroId", element: <SubWayGame /> },
     { path: "/metro/:metroId/:lineId", element: <SubWayGame /> },
     { path: "/privacy", element: <Privacy /> },
+    { path: "/guide", element: <Guide /> },
   ];
   const router = url ? createMemoryRouter(routes, { initialEntries: [url] }) : createBrowserRouter(routes);
 
