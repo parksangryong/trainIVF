@@ -1,4 +1,5 @@
 import Guide from "./Guide";
+import { AD_SLOTS } from "./config/ads";
 import { createBrowserRouter, createMemoryRouter, RouterProvider } from "react-router-dom";
 import SubWayGame from "./page/SubWayGame";
 import { AdSense } from "./Advertising/AdSense";
@@ -17,7 +18,7 @@ function App({ url }: { url?: string }) {
   ];
   const router = url ? createMemoryRouter(routes, { initialEntries: [url] }) : createBrowserRouter(routes);
 
-  return <><RouterProvider router={router} /><AdSense slot={""} /><a href="/privacy" style={{display:"block",textAlign:"center",margin:"0 0 28px",color:"#7898a9",fontSize:12}}>개인정보처리방침</a></>;
+  return <><RouterProvider router={router} /><AdSense slot={AD_SLOTS.footer} /><a href="/privacy" style={{display:"block",textAlign:"center",margin:"0 0 28px",color:"#7898a9",fontSize:12}}>개인정보처리방침</a></>;
 }
 
 export default App;
