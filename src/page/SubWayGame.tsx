@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { metroSystems } from "../data/subwayStations";
 import SeoSummary from "../SeoSummary";
+import { SITE_URL } from "../config/site";
 
 const SubWayGame = () => {
   const { metroId, lineId } = useParams();
@@ -17,7 +18,9 @@ const SubWayGame = () => {
     document.title = title;
     const setMeta = (selector: string, value: string) => document.querySelector<HTMLMetaElement>(selector)?.setAttribute("content", value);
     setMeta('meta[name="description"]', description); setMeta('meta[property="og:title"]', title); setMeta('meta[property="og:description"]', description); setMeta('meta[name="twitter:title"]', title); setMeta('meta[name="twitter:description"]', description);
-    document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute("href", `https://trainivf.com${location.pathname}`);
+    const url = `${SITE_URL}${location.pathname}`;
+    document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute("href", url);
+    setMeta('meta[property="og:url"]', url);
   }, [metro, selectedLine]);
 
   const drawStation = () => {
